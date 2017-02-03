@@ -7,17 +7,15 @@
 
     tools:context="com.example.bhomu.mycolorblobdetection.ColorBlobDetectionActivity">
 
-    <org.opencv.android.JavaCameraView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/color_blob_detection_activity_surface_view"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/angles"
         android:text="Hello World!" />
+    <org.opencv.android.JavaCameraView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/color_blob_detection_activity_surface_view"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -37,7 +35,26 @@
         android:layout_alignParentStart="true"
         android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp"
-        android:id="@+id/readcolor" />
+        android:id="@+id/red" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/motorSpeeds"
+        android:layout_alignLeft="@+id/red"
+        android:layout_alignStart="@+id/red"
+        android:layout_marginBottom="17dp"
+        android:id="@+id/blue" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/motorSpeeds"
+        android:layout_alignRight="@+id/blue"
+        android:layout_alignEnd="@+id/blue"
+        android:id="@+id/green" />
 
 
 </RelativeLayout>

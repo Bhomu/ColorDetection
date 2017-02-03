@@ -44,8 +44,9 @@ public class ColorBlobDetectionActivity extends Activity implements CvCameraView
     private Size                 SPECTRUM_SIZE;
     private Scalar               CONTOUR_COLOR;
     private Handler handler;
+    private Handler handler1;
     private CameraBridgeViewBase mOpenCvCameraView;
-
+    private int a =600;
     private BaseLoaderCallback  mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
         public void onManagerConnected(int status) {
@@ -81,24 +82,62 @@ public class ColorBlobDetectionActivity extends Activity implements CvCameraView
         mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.color_blob_detection_activity_surface_view);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
-
-        final Button button = (Button) findViewById(R.id.readcolor);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button b1 = (Button) findViewById(R.id.red);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                onTouched();
+
+               //onTouched(134,116,170);
+                handler = new Handler();
+                Runnable runnable=new Runnable() {
+                    @Override
+                    public void run() {
+
+                        onTouched(134,116,170);
+                        onTouche();
+
+                        handler.postDelayed(this,100);
+                    }
+                };handler.postDelayed(runnable,100);
+            }
+        });
+        Button b2 = (Button) findViewById(R.id.blue);
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //onTouched(134,116,170);
+                handler1 = new Handler();
+                Runnable runnable1=new Runnable() {
+                    @Override
+                    public void run() {
+
+                        onTouched(139,85,74);
+
+
+                        handler.postDelayed(this,100);
+                    }
+                };handler.postDelayed(runnable1,100);
+            }
+        });
+        Button b3 = (Button) findViewById(R.id.green);
+        b3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //onTouched(134,116,170);
+                handler1 = new Handler();
+                Runnable runnable1=new Runnable() {
+                    @Override
+                    public void run() {
+
+                        onTouched(139,85,74);
+
+
+                        handler.postDelayed(this,100);
+                    }
+                };handler.postDelayed(runnable1,100);
             }
         });
 
-
-
-        handler = new Handler();
-        Runnable runnable=new Runnable() {
-            @Override
-            public void run() {
-            onTouched();
-                handler.postDelayed(this,100);
-            }
-        };handler.postDelayed(runnable,100);
     }
 
     @Override
@@ -144,7 +183,7 @@ public class ColorBlobDetectionActivity extends Activity implements CvCameraView
         mRgba.release();
     }
 
-    public void onTouched() {
+    public void onTouched(int hsv_h, int hsv_s, int hsv_v) {
         int cols = mRgba.cols();
         int rows = mRgba.rows();
         /*
@@ -155,7 +194,7 @@ public class ColorBlobDetectionActivity extends Activity implements CvCameraView
         int y = 200;
 
         Log.i(TAG, "Touch image coordinates: (" + x + ", " + y + ")");
-
+        //Toast.makeText(this, "Touch image coordinates: (" + x + ", " + y + ")");
 
 
         Rect touchedRect = new Rect();
@@ -178,14 +217,16 @@ public class ColorBlobDetectionActivity extends Activity implements CvCameraView
             mBlobColorHsv.val[i] /= pointCount;
         Toast.makeText(this, "HSV= "+mBlobColorHsv, Toast.LENGTH_LONG).show();
 
-        //mBlobColorRgba = converScalarHsv2Rgba(mBlobColorHsv);
-        mBlobColorRgba.val[0]=89;
-        mBlobColorRgba.val[1]=0;
-        mBlobColorRgba.val[2]=15;
-        mBlobColorRgba.val[3]=8;
+        mBlobColorRgba = converScalarHsv2Rgba(mBlobColorHsv);
         Log.i(TAG, "Touched rgba color: (" + mBlobColorRgba.val[0] + ", " + mBlobColorRgba.val[1] +
                 ", " + mBlobColorRgba.val[2] + ", " + mBlobColorRgba.val[3] + ")");
 
+        mBlobColorHsv.val[0] = hsv_h;
+        mBlobColorHsv.val[1] = hsv_s;
+        mBlobColorHsv.val[2] = hsv_v;
+        mBlobColorHsv.val[3] = 0.0;
+
+      if(mBlobColorHsv.val[0]>120 && mBlobColorHsv.val[0]<140 && mBlobColorHsv.val[1]>90 && mBlobColorHsv.val[1]<130 &&mBlobColorHsv.val[2]>165 && mBlobColorHsv.val[2]<200 && mBlobColorHsv.val[3]>=0.0 && mBlobColorHsv.val[3]<64)
         mDetector.setHsvColor(mBlobColorHsv);
 
         Imgproc.resize(mDetector.getSpectrum(), mSpectrum, SPECTRUM_SIZE);
@@ -197,6 +238,68 @@ public class ColorBlobDetectionActivity extends Activity implements CvCameraView
 
 
     }
+
+
+        public void onTouche() {
+        int cols = mRgba.cols();
+        int rows = mRgba.rows();
+        /*
+        int xOffset = (mOpenCvCameraView.getWidth() - cols) / 2;
+        int yOffset = (mOpenCvCameraView.getHeight() - rows) / 2;
+        */
+    int x = 396;
+    int y = 200;
+
+    Log.i(TAG, "Touch image coordinates: (" + x + ", " + y + ")");
+    //Toast.makeText(this, "Touch image coordinates: (" + x + ", " + y + ")");
+
+
+    Rect touchedRect = new Rect();
+
+    touchedRect.x = (x>4) ? x-4 : 0;
+    touchedRect.y = (y>4) ? y-4 : 0;
+
+    touchedRect.width = (x+4 < cols) ? x + 4 - touchedRect.x : cols - touchedRect.x;
+    touchedRect.height = (y+4 < rows) ? y + 4 - touchedRect.y : rows - touchedRect.y;
+
+    Mat touchedRegionRgba = mRgba.submat(touchedRect);
+
+    Mat touchedRegionHsv = new Mat();
+    Imgproc.cvtColor(touchedRegionRgba, touchedRegionHsv, Imgproc.COLOR_RGB2HSV_FULL);
+
+    // Calculate average color of touched region
+    mBlobColorHsv = Core.sumElems(touchedRegionHsv);
+    int pointCount = touchedRect.width*touchedRect.height;
+    for (int i = 0; i < mBlobColorHsv.val.length; i++)
+    mBlobColorHsv.val[i] /= pointCount;
+    Toast.makeText(this, "HSV= "+mBlobColorHsv, Toast.LENGTH_LONG).show();
+
+    mBlobColorRgba = converScalarHsv2Rgba(mBlobColorHsv);
+    Log.i(TAG, "Touched rgba color: (" + mBlobColorRgba.val[0] + ", " + mBlobColorRgba.val[1] +
+            ", " + mBlobColorRgba.val[2] + ", " + mBlobColorRgba.val[3] + ")");
+    /*
+    mBlobColorHsv.val[0] = hsv_h;
+    mBlobColorHsv.val[1] = hsv_s;
+    mBlobColorHsv.val[2] = hsv_v;
+    mBlobColorHsv.val[3] = 0.0;
+    */
+  //  if(mBlobColorHsv.val[0]>120 && mBlobColorHsv.val[0]<140 && mBlobColorHsv.val[1]>90 && mBlobColorHsv.val[1]<130 &&mBlobColorHsv.val[2]>165 && mBlobColorHsv.val[2]<200 && mBlobColorHsv.val[3]>=0.0 && mBlobColorHsv.val[3]<64)
+            mDetector.setHsvColor(mBlobColorHsv);
+
+    Imgproc.resize(mDetector.getSpectrum(), mSpectrum, SPECTRUM_SIZE);
+
+    mIsColorSelected = true;
+
+    touchedRegionRgba.release();
+    touchedRegionHsv.release();
+
+            if(mBlobColorHsv.val[0] == 134 && mBlobColorHsv.val[0] ==116 && mBlobColorHsv.val[0] ==170){
+                Log.i(TAG, "////////////////Stop the quadcopter ") ;
+            }
+
+
+}
+
 
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
         mRgba = inputFrame.rgba();
