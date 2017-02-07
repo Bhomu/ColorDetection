@@ -61,7 +61,7 @@ public class ColorBlobDetectionActivity extends Activity implements CvCameraView
     private double centreX,centreY;
     int flag,count;
     TextView textView1,textView2;
-    public String s1=null,s2=null;
+    public String s1="color not detected",s2="color not detected";
 
     private BaseLoaderCallback  mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -313,14 +313,14 @@ public class ColorBlobDetectionActivity extends Activity implements CvCameraView
             centreY=colorCenterY;
             if((centreX-750) > 40){
                 Log.i(TAG," /////////////////////Move right ");
-                s1="Move Right";
+                s1="Move back";
 
 
             }
             else {
                 if((centreX-750) < -40) {
                     Log.i(TAG, " /////////////////////Move left ");
-                    s1="Move left";
+                    s1="Move forward";
 
                 }
                 else{
@@ -331,14 +331,14 @@ public class ColorBlobDetectionActivity extends Activity implements CvCameraView
             }
             if((centreY-360) > 25){
                 Log.i(TAG,"//////////////////Move down");
-                s2="Move down";
+                s2="Move left";
 
 
             }
             else {
                 if((centreY-360) < -25) {
                     Log.i(TAG, "/////////////////// Move up ");
-                    s2="Move up";
+                    s2="Move right";
 
                 }
                 else {
@@ -347,7 +347,7 @@ public class ColorBlobDetectionActivity extends Activity implements CvCameraView
 
                 }}
                     //Toast.makeText(this,"x = "+colorCenterX+ "  y = "+colorCenterY,Toast.LENGTH_LONG).show();
-        }else { s1=null;s2=null;}
+        }else { s1="color not detected";s2="color not detected";}
 
 //                Log.i(TAG, "///////// Maxx = " + maxX + " MAxy = " + maxY);
 
