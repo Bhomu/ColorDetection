@@ -7,54 +7,78 @@
 
     tools:context="com.example.bhomu.mycolorblobdetection.ColorBlobDetectionActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/angles"
-        android:text="Hello World!" />
+
     <org.opencv.android.JavaCameraView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/color_blob_detection_activity_surface_view"/>
+        android:id="@+id/color_blob_detection_activity_surface_view"
+        android:layout_below="@+id/red" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/motorSpeeds"
-        android:text="Hello World!"
-        android:layout_below="@+id/angles"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="106dp" />
 
     <Button
-        android:text="Button"
+        android:text="Green"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/green"
+        android:layout_below="@+id/red"
+        android:layout_alignLeft="@+id/red"
+        android:layout_alignStart="@+id/red"
+        android:layout_marginTop="93dp" />
+
+    <Button
+        android:text="Blue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/blue"
+        android:layout_below="@+id/red"
+        android:layout_alignLeft="@+id/red"
+        android:layout_alignStart="@+id/red"
+        android:layout_marginTop="30dp" />
+
+    <Button
+        android:text="Yellow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/yellow"
+        android:layout_below="@+id/green"
+        android:layout_alignLeft="@+id/green"
+        android:layout_alignStart="@+id/green"
+        android:layout_marginTop="22dp" />
+
+    <Button
+        android:text="Red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:id="@+id/red"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:id="@+id/red" />
+        android:layout_marginTop="19dp" />
 
-    <Button
-        android:text="Button"
+    <TextView
+        android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/motorSpeeds"
-        android:layout_alignLeft="@+id/red"
-        android:layout_alignStart="@+id/red"
-        android:layout_marginBottom="17dp"
-        android:id="@+id/blue" />
+        android:layout_alignTop="@+id/red"
+        android:layout_toRightOf="@+id/red"
+        android:layout_toEndOf="@+id/red"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="13dp"
+        android:id="@+id/leftRight" />
 
-    <Button
-        android:text="Button"
+    <TextView
+        android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/motorSpeeds"
-        android:layout_alignRight="@+id/blue"
-        android:layout_alignEnd="@+id/blue"
-        android:id="@+id/green" />
+        android:layout_alignTop="@+id/leftRight"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="53dp"
+        android:layout_marginEnd="53dp"
+        android:id="@+id/upDown" />
 
 
 </RelativeLayout>
